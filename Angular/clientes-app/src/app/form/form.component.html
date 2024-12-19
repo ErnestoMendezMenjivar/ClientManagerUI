@@ -1,0 +1,164 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+
+            <!-- <ul class="alert alert-danger" *ngIf="errores?.length > 0">
+                <div class="err">
+                    <li *ngFor="let err of errores">
+                        {{err}}
+                    </li>
+                </div>
+            </ul> -->
+
+            <div class="card bg-dark text-white ">
+                <div class="card-header text-center" *ngIf="!cliente.id else elseTemplate">
+                    <h4><b>{{ titulo }}</b></h4>
+                </div>
+                <ng-template #elseTemplate>
+                    <div class="card-header text-center">
+                        <h4><b>{{ titulo2 }}</b></h4>
+                    </div>
+                </ng-template>
+                <div class="card-body">
+
+                    <form #clienteForm="ngForm" class="row g-3 needs-validation" novalidate>
+
+                        <!--input nombre-->
+                        <div class="form-group row mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <b>Nombre: </b>
+                                </span>
+                                <input type="text" class="form-control" id="nombre" [(ngModel)]="cliente.nombre" name="nombre"
+                                    #nombre="ngModel" [ngClass]="{'is-invalid': errores['nombre']?.length, 'is-valid': !errores['nombre']?.length && nombre.touched}" required>
+                            </div>
+                            <!-- Errores del backend -->
+                            <!-- <div class="alert alert-danger alerta" *ngIf="errores['nombre']?.length">
+                                <div *ngFor="let error of errores['nombre']">
+                                    &nbsp;{{ error }}
+                                </div>
+                            </div> -->
+
+                            <div class="invalid-feedback">
+                                <div *ngFor="let error of errores['nombre']">{{ error }} </div>
+                            </div>
+                            <div class="valid-feedback">¡Nombre válido!</div>
+                        </div>
+
+                         <!--input apellido-->
+                        <div class="form-group row mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <b>Apellido: </b>
+                                </span>
+                                <input type="text" class="form-control" [(ngModel)]="cliente.apellido" name="apellido"
+                                    #apellido="ngModel" (ngModelChange)="cleanBackendError('apellido')">
+                            </div>
+                            <!-- <div class="alert alert-danger alerta"
+                                *ngIf="apellido.invalid && (apellido.dirty || apellido.touched)">
+                                <div *ngIf="apellido.errors.required">
+                                    &nbsp;Apellido es requerido
+                                </div>
+                                <div *ngIf="apellido.errors.minlength">
+                                    &nbsp;Apellido debe tener al menos 4 caracteres!!
+                                </div>
+                            </div> -->
+                            <!-- Errores del backend -->
+                            <div class="alert alert-danger alerta" *ngIf="errores['apellido']?.length">
+                                <div *ngFor="let error of errores['apellido']">
+                                    &nbsp;{{ error }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                         <!--input email-->
+                        <div class="form-group row mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <b>Email: &nbsp;&nbsp;&nbsp;</b>
+                                </span>
+                                <input type="text" class="form-control" [(ngModel)]="cliente.email" name="email"
+                                    #email="ngModel" (ngModelChange)="cleanBackendError('email')">
+                            </div>
+                            <!-- <div class="alert alert-danger alerta"
+                                *ngIf="email.invalid && (email.dirty || email.touched)">
+                                <div *ngIf="email.errors.required">
+                                    &nbsp;El email es requerido!!
+                                </div>
+                                <div *ngIf="email.errors.email">
+                                    n&nbsp;Email debe tener un formato valido!!
+                                </div>
+                            </div> -->
+                            <!-- Errores del backend -->
+                            <div class="alert alert-danger alerta" *ngIf="errores['email']?.length">
+                                <div *ngFor="let error of errores['email']">
+                                    &nbsp;{{ error }}
+                                </div>
+                            </div>
+
+                        </div>
+
+                         <!--input fecha-->
+                        <div class="form-group row mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <b>Fecha: &nbsp;&nbsp;</b>
+                                </span>
+                                <input [matDatepicker]="myDatepicker" class="form-control "
+                                    [(ngModel)]="cliente.createAt" name="createAt" disabled>
+
+                                <mat-datepicker-toggle [for]="myDatepicker" class="color"></mat-datepicker-toggle>
+                                <mat-datepicker #myDatepicker disabled="false"></mat-datepicker>
+                            </div>
+                            <div class="alert alert-danger alerta" *ngIf="errores['createAt']?.length">
+                                <div *ngFor="let error of errores['createAt']">
+                                    &nbsp;{{ error }}
+                                </div>
+                            </div>
+                        </div>
+
+                         <!--input region-->
+                        <div class="form-group row mb-3">
+                            <div class="input-group">
+                                <span class="input-group-text" id="addon-wrapping">
+                                    <b>Region: &nbsp;&nbsp;</b>
+                                </span>
+                                <select class="form-control" [(ngModel)]="cliente.region" name="region">
+                                    <option [ngValue]=""></option>
+                                    <option *ngFor="let region of regiones" [ngValue]="region">{{ region.nombre }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-3 text-center">
+                            <div class="button-container">
+
+                                <button type="submit" class="btn btn-outline-danger btn-lg custom-btn"
+                                    (click)="regresar()">Cancelar</button>
+
+                                <button type="submit" role="button" class="btn btn-outline-success btn-lg custom-btn"
+                                    (click)="create()" *ngIf="!cliente.id else elseBlock"
+                                    >Guardar</button>
+
+                                <ng-template #elseBlock>
+                                    <button type="submit" role="button"
+                                        class="btn btn-outline-primary btn-lg custom-btn"
+                                        (click)="update()">Editar</button>
+                                </ng-template>
+
+                            </div>
+                        </div>
+
+
+                    </form>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>

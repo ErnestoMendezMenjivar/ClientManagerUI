@@ -1,0 +1,12 @@
+/*estilo de del paginador*/
+.disab {
+    background-color: #f0e7e7; /* Un color gris claro */
+
+    /* color: #d53939; Un color de texto gris */
+}
+
+.disabled2{
+    pointer-events: none;
+    cursor: default; /* Color gris para indicar que está deshabilitado */
+    background-color: #d7a0b9;
+}

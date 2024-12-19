@@ -1,0 +1,46 @@
+/* CSS personalizado */
+.custom-btn {
+    width: 200px; /* Ajusta el ancho según sea necesario */
+    font-size: medium;
+    margin: 0 auto; /* Esto centrará horizontalmente el botón */
+}
+
+.alerta{
+    width: 590px;
+    height: 50px;
+    margin: 0 auto; /* Esto centrará horizontalmente el botón*/
+}
+
+.err{
+    padding-left: 2rem;
+}
+
+.color{
+    background-color: #e9ecef;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    gap: 20px; /* Espacio entre los botones */
+}
+
+/* validation de boostrap */
+.invalid-feedback {
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+  
+  .valid-feedback {
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+  }
+  
+  .is-invalid {
+    border-color: #dc3545; /* Color rojo */
+  }
+  
+  .is-valid {
+    border-color: #28a745; /* Color verde */
+  }
+

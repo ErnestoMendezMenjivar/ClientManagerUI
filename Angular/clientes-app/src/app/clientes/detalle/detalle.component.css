@@ -1,0 +1,43 @@
+.custom-btn {
+    width: 200px; /* Ajusta el ancho según sea necesario */
+    font-size: medium;
+    margin: 0 auto; /* Esto centrará horizontalmente el botón */
+}
+
+img{
+    width: 460px;
+    height: 299px;
+}
+
+.modal-backdrop{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1040;
+}
+
+.modal{
+    z-index: 1050;
+}
+
+.animacion{
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-fill-mode: both;
+}
+
+.fadeIn{
+    animation-name: fadeIn;
+    -webkit-animation-name: fadeIn;
+}
+
+@keyframes fadeIn {0% {opacity:0}to{opacity:1}}
+
+@-webkit-keyframes fadeIn {0% {opacity:0}to{opacity:1}}

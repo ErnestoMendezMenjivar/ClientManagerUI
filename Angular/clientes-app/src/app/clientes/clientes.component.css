@@ -1,0 +1,9 @@
+.custom-card {
+    width: 70%; /* Ajusta el ancho de la tabla según tus necesidades */
+    margin: 0 auto; /* Centra la tabla horizontalmente */
+}
+
+.encabezado{
+    text-align: center;
+    margin: 0 0 20px;
+}

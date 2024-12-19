@@ -1,0 +1,56 @@
+
+<detalle-cliente *ngIf="clienteSeleccionado" [cliente]="clienteSeleccionado"></detalle-cliente>
+
+<div class="container">
+
+    <h1 class="encabezado">Bienvenidos a Angular App</h1>
+
+<div class="card border-primary  custom-card" >
+    <div class="card-header">CLIENTES</div>
+    <div class="card-body text-primary" >
+        <h5 class="card-title">Listado de clientes</h5>
+        <div class="table-responsive">
+            <div class="my-2 text-left">
+                <button class="btn btn-roudered btn-primary" [routerLink]="['/clientes/form']">Agregar Cliente</button>
+            </div>
+            <div *ngIf="clientes?.length == 0" class="alert alert-info">
+                No hay registros en la base de datos!
+            </div>
+        <table class="table table-hover table-striped custom-table " *ngIf="clientes?.length>0" >
+            <thead>
+                <tr>
+                    <th>PERFIL</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>EMAIL</th>
+                    <th>FECHA</th>
+                    <th>EDITAR</th>
+                    <th>ELIMINAR</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let clientee of clientes">
+                    <td>
+                        <img *ngIf="clientee?.foto" (click)="abrirModal(clientee)"  src="http://localhost:8087/api/uploads/img/{{clientee.foto}}" alt="{{clientee.foto}}" class="img-thumbnail rounded"
+                        style="width: 64px; cursor: pointer;">
+                        <img *ngIf="!clientee?.foto" (click)="abrirModal(clientee)"  src="http://localhost:8087/api/uploads/img/no-user.png" alt="sin foto" class="img-thumbnail rounded"
+                        style="width: 64px; cursor: pointer;">
+                        </td>
+                    <td>{{clientee.nombre}}</td>       
+                    <td>{{clientee.apellido}}</td>
+                    <td>{{clientee.email}}</td>
+                    <td>{{clientee.createAt | date: "dd MMMM yyyy"}}</td>
+                    <td>
+                        <button type="button" name="editar" [routerLink]="['/clientes/form',clientee.id]" class="btn btn-outline-primary">Editar</button>
+                    </td>
+                    <td>
+                        <button type="button" name="eliminar" (click)='delete(clientee)' class="btn btn-outline-danger">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <paginator-nav *ngIf="paginador" [paginador]="paginador"></paginator-nav>
+    </div>
+    </div>
+</div>
+</div>
